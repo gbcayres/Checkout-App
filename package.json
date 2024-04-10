@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/courgette": "^0.2.3",
     "@expo-google-fonts/poppins": "^0.2.3",
     "expo": "~50.0.14",
     "expo-font": "~11.10.3",
