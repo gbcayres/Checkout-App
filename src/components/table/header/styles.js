@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         padding: 8,
         textAlign: "center"
-    },
+    }
 })
 
 export default styles;

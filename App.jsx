@@ -10,6 +10,7 @@ import { Courgette_400Regular } from "@expo-google-fonts/courgette"
 
 import Home from "./src/screens/home";
 import Management from "./src/screens/management";
+import History from "./src/screens/history";
 import Loading from "./src/components/ui/loading";
 
 export default function App() {
@@ -31,7 +32,8 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <Management />
+      <History />
+      {/* <Management /> */}
       {/* <Home /> */}
     </>
   );
