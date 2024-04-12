@@ -1,3 +1,5 @@
+import { StatusBar } from "react-native";
+
 import { 
   useFonts,
   Poppins_400Regular,
@@ -6,10 +8,9 @@ import {
 } from "@expo-google-fonts/poppins";
 import { Courgette_400Regular } from "@expo-google-fonts/courgette"
 
-import { StatusBar } from "react-native";
-
 import Home from "./src/screens/home";
-import Loading from "./src/components/loading";
+import Management from "./src/screens/management";
+import Loading from "./src/components/ui/loading";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,7 +31,8 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <Home />
+      <Management />
+      {/* <Home /> */}
     </>
   );
 }

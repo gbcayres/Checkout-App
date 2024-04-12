@@ -1,49 +1,48 @@
-import { View, Text, SafeAreaView } from "react-native"
+import { View, Text } from "react-native"
 
-import { MaterialIcons } from '@expo/vector-icons';
+import Header from "../../components/layout/header";
+import Main from "../../components/layout/main";
+import Button from "../../components/ui/button";
 
-import { FontAwesome6 } from '@expo/vector-icons';
-
-import Button from "../../components/button";
+import { MaterialIcons, FontAwesome6 } from '@expo/vector-icons';
 
 import styles from './styles'
 import { theme } from "../../theme";
+import Container from "../../components/layout/container";
 
 function Home() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+    <Container>
+      <Header>
         <Text style={styles.greeting}>Bem Vindo ao</Text>
-        <Text style={styles.title}>
-            Checkout App
-        </Text>
-      </View>
-      <View style={styles.main}> 
+        <Text style={styles.homeTitle}>Checkout App</Text>
+      </Header>
+      <Main> 
         <FontAwesome6 
           style={styles.logo}
           name="money-bill-transfer" 
           size={150}
-          color={theme.colors.pink}
+          color={theme.colors.white}
         />
         <View style={styles.buttonContainer}>
           <Button>
             <Button.Text>Abrir Caixa</Button.Text>
-            <MaterialIcons 
-              name="shopping-cart-checkout" 
-              size={24} 
-              color={theme.colors.white} />
+            <MaterialIcons
+              name="attach-money" 
+              size={22} 
+              color={theme.colors.pink} />
           </Button>
           <Button>
             <Button.Text>Historico de Caixas</Button.Text>
             <MaterialIcons 
               name="history" 
-              size={24} 
-              color={theme.colors.white} />
+              size={22} 
+              color={theme.colors.pink} />
           </Button>
         </View>
 
-      </View>
-    </SafeAreaView>
+      </Main>
+    </Container>
   );
 }
 
