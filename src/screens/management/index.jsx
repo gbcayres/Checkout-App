@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 
 import Container from "../../components/layout/container";
 import Header from "../../components/layout/header";
@@ -62,7 +62,7 @@ function Management() {
             </CustomText>
         </Header>
 
-        <Main style={{justifyContent: "flex-start", gap: 20}}>
+        <Main>
             <Text style={styles.currentBalance}>
                 Saldo Atual: <Text style={styles.currentBalanceValue}>R$100</Text>
             </Text>

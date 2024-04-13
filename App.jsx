@@ -32,8 +32,8 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <History />
-      {/* <Management /> */}
+      {/* <History /> */}
+      <Management />
       {/* <Home /> */}
     </>
   );

@@ -9,17 +9,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         gap: 8,
         backgroundColor: theme.colors.blue,
-        paddingVertical: 16,
-        paddingHorizontal: 32,
         borderRadius: 20,
-        width: "100%",   
+        width: "100%",
+        height: 65  
     },
     buttonText: {
-        width: "100%",
         fontSize: 18,
-        fontFamily: theme.fontFamily.medium,
+        fontFamily: theme.fontFamily.bold,
         color: theme.colors.white,
-        textAlign: "center"
     }
 });
 

@@ -11,6 +11,7 @@ function History() {
             <Header.Title>Histórico de Caixas</Header.Title>
         </Header>
         <Main>
+            {/* historico de caixas */}
         </Main>
     </Container>
   )

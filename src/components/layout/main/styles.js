@@ -5,8 +5,9 @@ const styles = StyleSheet.create({
         flex: 4,
         paddingVertical: 20,
         paddingHorizontal: 40,
+        gap: 20,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-around",
     }
 })
 

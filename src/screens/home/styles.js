@@ -5,17 +5,29 @@ const styles = StyleSheet.create({
     greeting: {
         fontFamily: theme.fontFamily.regular,
         color: theme.colors.white,
-        fontSize: 20,
+        fontSize: 22,
         fontStyle: "italic"
     },
     homeTitle: {
         fontFamily: theme.fontFamily.home_title,
-        fontSize: 60,
+        fontSize: 90,
         color: theme.colors.white,
-        marginBottom: -40,
+        marginBottom: -50,
+        textAlign: "center",
         textShadowColor: theme.colors.cyan,
         textShadowOffset: {width: -4, height: 2},
-        textShadowRadius: 1
+        textShadowRadius: 1,
+    },
+    homeSubtitle: {
+        fontFamily: theme.fontFamily.home_title,
+        fontSize: 90,
+        color: theme.colors.white,
+        marginTop: -60,
+        textAlign: "right",
+        width: "100%",
+        textShadowColor: theme.colors.cyan,
+        textShadowOffset: {width: -5, height: 3},
+        textShadowRadius: 1,
     },
     buttonContainer: {
         marginTop:  50,

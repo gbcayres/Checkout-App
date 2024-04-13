@@ -6,8 +6,8 @@ function TableHeader({headerData}) {
   return (
     <Row 
         data={headerData} 
-        style={styles.historyHeader} 
         textStyle={styles.headerLabel}
+        style={styles.historyHeader} 
     />
   )
 }

@@ -1,15 +1,17 @@
-import { TouchableOpacity, Text, onPress } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 import styles from "./styles"
 
-function Button({children}) {
+function Button({children, onPress, leftIcon, rightIcon}) {
   return (
     <TouchableOpacity 
         style={styles.button}
         activeOpacity={0.5}
         onPress={onPress}
     >
-        {children}
+      {leftIcon}
+      {children}
+      {rightIcon}
     </TouchableOpacity>
   );
 }
