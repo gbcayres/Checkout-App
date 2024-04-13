@@ -4,7 +4,7 @@ import { View, Text} from "react-native";
 import Header from "../../components/layout/header";
 import Main from "../../components/layout/main";
 import Button from "../../components/ui/button";
-import CustomModal from "../../components/modal";
+import NewCheckoutModal from "./newCheckoutModal";
 
 import { MaterialIcons, FontAwesome6 } from '@expo/vector-icons';
 
@@ -14,6 +14,7 @@ import Container from "../../components/layout/container";
 
 function Home() {
     const [IsModalVisible, setIsModalVisible] = useState(false);
+    const [date, setDate] = useState('');
 
     const openModal = () => {
         setIsModalVisible(true);
@@ -56,28 +57,11 @@ function Home() {
                     </Button>
                 </View>
             </Main>
-            <CustomModal 
-                visible={IsModalVisible} 
+            <NewCheckoutModal 
+                isVisible={IsModalVisible}
                 onClose={closeModal}
-                animation={"fade"}
-            >
-                <CustomModal.Title>Informações de Caixa</CustomModal.Title>
-                <CustomModal.Content>
-                   <Text> Testando modal</Text>
-                </CustomModal.Content>
-                <CustomModal.Actions>
-                    <CustomModal.Action 
-                        title="action1" 
-                        color={theme.colors.green}
-                        onPress={() => console.log("action 1!!!")}
-                    />
-                    <CustomModal.Action 
-                        title="Cancelar" 
-                        color={theme.colors.red}
-                        onPress={closeModal}
-                    />
-                </CustomModal.Actions>
-            </CustomModal>
+                animation="fade"
+            />
         </Container>
     );
 }

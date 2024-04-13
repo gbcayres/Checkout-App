@@ -34,6 +34,24 @@ const styles = StyleSheet.create({
         width: "100%",
         gap: 15
     },
+    inputLabel: {
+        fontFamily: theme.fontFamily.bold
+    },
+    inputContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        paddingHorizontal: 8,
+        borderRadius: 8,
+        borderColor: theme.colors.gray_200,
+        borderWidth: 3
+    },
+    input: {
+        flex: 1,
+        textAlign: "center",
+        fontSize: 16,
+        fontFamily: theme.fontFamily.regular,
+        paddingVertical: 8,                         
+    },
 })
 
 export default styles;
