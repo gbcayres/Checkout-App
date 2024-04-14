@@ -1,30 +1,19 @@
-import { TouchableOpacity } from "react-native";
-import { Row } from "react-native-table-component";
+import React from "react";
+import { DataTable } from "react-native-paper";
 
 import styles from "./styles";
-import { theme } from "../../../theme";
 
-function TableRow({ rowData}) {
-    function getRowColor() {
-        if(rowData[0] === 'Entrada') {
-            return {backgroundColor: theme.colors.green};
-        }
+function TableRow({ rowData }) {
+    const cellData = rowData.slice(0, 3)
+    const transactionStyle = cellData[0] === 'Entrada' ? styles.inTransaction : styles.outTransaction;
 
-        return {backgroundColor: theme.colors.red};
-    }
-    
-    return (
-        <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => console.log(rowData[3].impressao)}
-        >
-            <Row
-                data={rowData.slice(0, 3)}
-                style={[styles.transaction, getRowColor()]}
-                textStyle={styles.transactionText}
-            />
-        </TouchableOpacity>
-    )
+  return (
+    <DataTable.Row style={transactionStyle}>
+      {cellData.map((item, index) => (
+        <DataTable.Cell textStyle={styles.transactionText} key={index}>{item}</DataTable.Cell>
+      ))}
+    </DataTable.Row>
+  );
 }
 
 export default TableRow;

@@ -52,6 +52,34 @@ const styles = StyleSheet.create({
         fontFamily: theme.fontFamily.regular,
         paddingVertical: 8,                         
     },
+    section: {
+        width: "70%",
+        alignItems: "center",
+        gap: 5
+    },
+    sectionLabel: {
+        fontFamily: theme.fontFamily.bold,
+        fontSize: 16,
+        fontStyle: "italic",
+    },
+    inputContainer: {
+        height: 50,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingTop: 0,
+        paddingBottom: 0,
+        padding: 8,
+        borderColor: theme.colors.gray_200,
+        borderWidth: 3,
+        borderRadius: 12
+    },
+    input: {
+        flex: 1,
+        textAlign: "center",
+        fontSize: 20,
+        fontFamily: theme.fontFamily.regular,
+    }
 })
 
 export default styles;

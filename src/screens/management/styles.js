@@ -3,6 +3,15 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../theme";
 
 const styles = StyleSheet.create({
+    headerSection: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-around",
+    },
+    headerInfoContainer: {
+        justifyContent: "center",
+        alignItems: "center"
+    },
     headerInfo: {
         fontSize: 18,
         color: theme.colors.white,

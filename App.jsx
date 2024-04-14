@@ -1,5 +1,8 @@
 import { StatusBar } from "react-native";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import { 
   useFonts,
   Poppins_400Regular,
@@ -12,6 +15,8 @@ import Home from "./src/screens/home";
 import Management from "./src/screens/management";
 import History from "./src/screens/history";
 import Loading from "./src/components/ui/loading";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,15 +31,26 @@ export default function App() {
   }
 
   return (
-    <> 
+    <NavigationContainer>
       <StatusBar
         barStyle="light-content"
         backgroundColor="transparent"
         translucent
       />
-      {/* <History /> */}
-      {/* <Management /> */}
-      <Home />
-    </>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen 
+          name="Home" 
+          component={Home} 
+          options={{ headerShown: false }}/>
+        <Stack.Screen 
+          name="Management" 
+          component={Management} 
+          options={{ headerShown: false }}/>
+        <Stack.Screen 
+          name="History" 
+          component={History} 
+          options={{ headerShown: false }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

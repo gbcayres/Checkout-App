@@ -1,15 +1,15 @@
-import { Row } from "react-native-table-component";
+import { DataTable } from "react-native-paper";
 
 import styles from "./styles";
 
-function TableHeader({headerData}) {
+function TableHeader({ headerData }) {
   return (
-    <Row 
-        data={headerData} 
-        textStyle={styles.headerLabel}
-        style={styles.historyHeader} 
-    />
-  )
+    <DataTable.Header style={styles.historyHeader}>
+      {headerData.map((item, index) => (
+        <DataTable.Title textStyle={styles.headerLabel} key={index}>{item}</DataTable.Title>
+      ))}
+    </DataTable.Header>
+  );
 }
 
 export default TableHeader;
