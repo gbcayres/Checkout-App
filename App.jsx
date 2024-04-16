@@ -16,6 +16,9 @@ import Management from "./src/screens/management";
 import History from "./src/screens/history";
 import Loading from "./src/components/ui/loading";
 
+import { CheckoutProvider } from "./src/context/CheckoutContext";
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -37,20 +40,24 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen 
-          name="Home" 
-          component={Home} 
-          options={{ headerShown: false }}/>
-        <Stack.Screen 
-          name="Management" 
-          component={Management} 
-          options={{ headerShown: false }}/>
-        <Stack.Screen 
-          name="History" 
-          component={History} 
-          options={{ headerShown: false }}/>
-      </Stack.Navigator>
+      <CheckoutProvider>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen 
+            name="Home" 
+            component={Home} 
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen 
+            name="Management" 
+            component={Management} 
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen 
+            name="History" 
+            component={History} 
+            options={{ headerShown: false }}/>
+        </Stack.Navigator>
+      </CheckoutProvider>
     </NavigationContainer>
   );
 }

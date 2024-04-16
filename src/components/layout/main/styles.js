@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         gap: 20,
         alignItems: "center",
         justifyContent: "space-around",
-    }
-})
+    },
+});
 
 export default styles;

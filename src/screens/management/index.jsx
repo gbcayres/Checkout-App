@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useContext } from "react";
+import { Text, View, TouchableOpacity} from "react-native";
 
 import Container from "../../components/layout/container";
 import Header from "../../components/layout/header";
@@ -12,11 +12,11 @@ import { FontAwesome6, Ionicons } from '@expo/vector-icons';
 
 import styles from "./styles";
 import { theme } from "../../theme";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
+import { CheckoutContext } from "../../context/CheckoutContext";
 
 function Management({navigation}) {
-    const route = useRoute();
-    const { setIsCheckoutOpen } = route.params;
+    const { checkoutDate, setIsCheckoutOpen} = useContext(CheckoutContext);
 
     const closeCheckout = () => {
         setIsCheckoutOpen(false);
@@ -69,7 +69,7 @@ function Management({navigation}) {
                             />
                         }
                     >
-                        Dia: <Text>12/04/2024</Text>
+                        Dia: <Text>{checkoutDate}</Text>
                     </CustomText>
                     <CustomText
                         style={styles.headerInfo}
@@ -81,7 +81,7 @@ function Management({navigation}) {
                             />
                         }
                     >
-                        Saldo Inicial: <Text>R$50</Text>
+                        Saldo Inicial: <Text>50</Text>
                     </CustomText>
                 </View>
             </View>

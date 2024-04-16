@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { View, Text} from "react-native";
 import { TextInputMask } from "react-native-masked-text";
 
@@ -11,13 +11,15 @@ import CustomModal from "../../components/modal"
 import { MaterialIcons, FontAwesome6 } from '@expo/vector-icons';
 
 import styles from './styles';
-import { theme } from "../../theme";
+import { theme } from "../../theme"
 
-import { openCheckout } from "../../data/dataHandler"
+import { CheckoutContext } from "../../context/CheckoutContext";
+import { saveCheckout } from "../../data/dataHandler"
 
 function Home({navigation}) {
+    const {checkoutDate, setCheckoutDate, isCheckoutOpen, setIsCheckoutOpen} = useContext(CheckoutContext);
+
     const [IsModalVisible, setIsModalVisible] = useState(false);
-    const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     const [date, setDate] = useState('');
     const [openBalance, setOpenBalance] = useState('');
 
@@ -27,21 +29,21 @@ function Home({navigation}) {
 
     const closeModal = () => {
         setIsModalVisible(false);
+        resetForm();
     }
 
-    const handleConfirm = async () => {
-        await openCheckout(date, openBalance);
+    const resetForm = () => {
+        setDate('');
+        setOpenBalance('');
+    }
+
+    const confirmCheckout = async () => {
+        const newCheckout = { openBalance }
+        setCheckoutDate(date);
         setIsCheckoutOpen(true);
+        await saveCheckout(checkoutDate, newCheckout);
         closeModal();
-        navigation.navigate('Management', { setIsCheckoutOpen });
-        setDate('');
-        setOpenBalance('');
-    }
-
-    const handleCancel = () => {
-        closeModal();
-        setDate('');
-        setOpenBalance('');
+        navigation.navigate("Management");
     }
 
     return (
@@ -59,19 +61,15 @@ function Home({navigation}) {
                     color={theme.colors.pink}
                 />
                 <View style={styles.buttonContainer}>
-                    {!isCheckoutOpen ?
-                        <Button onPress={openModal}>
-                            <Button.Text>Abrir Caixa</Button.Text>
-                            <MaterialIcons
-                                name="attach-money" 
-                                size={26} 
-                                color={theme.colors.white}
-                            />
-                        </Button>
-                            :
+                    {isCheckoutOpen ? (
                         <Button onPress={() => navigation.navigate("Management")}>
                             <Button.Text>Gerenciar Caixa</Button.Text>
-                        </Button>}
+                        </Button>
+                    ) : (
+                        <Button onPress={openModal}>
+                            <Button.Text>Abrir Caixa</Button.Text>
+                        </Button>
+                    )}
                     <Button>
                         <Button.Text>Historico de Caixas</Button.Text>
                         <MaterialIcons 
@@ -131,12 +129,12 @@ function Home({navigation}) {
                     <CustomModal.Action 
                         title="Confirmar" 
                         color={theme.colors.green}
-                        onPress={handleConfirm}
+                        onPress={confirmCheckout}
                     />
                     <CustomModal.Action 
                         title="Cancelar" 
                         color={theme.colors.red}
-                        onPress={handleCancel}
+                        onPress={closeModal}
                     />
                 </CustomModal.Actions>
             </CustomModal>
