@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Text, View, TouchableOpacity} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Container from "../../components/layout/container";
 import Header from "../../components/layout/header";
@@ -7,6 +8,7 @@ import Main from "../../components/layout/main";
 import Button from "../../components/ui/button";
 import Table from "../../components/table";
 import CustomText from "../../components/ui/customText";
+import Loading from "../../components/ui/loading"
 
 import { FontAwesome6, Ionicons } from '@expo/vector-icons';
 
@@ -14,12 +16,19 @@ import styles from "./styles";
 import { theme } from "../../theme";
 
 import { CheckoutContext } from "../../context/CheckoutContext";
+import useCheckout from "../../hooks/useCheckout";
 
 function Management({navigation}) {
-    const { checkoutDate, setIsCheckoutOpen} = useContext(CheckoutContext);
+    const {openCheckoutDate, setOpenCheckoutDate, setIsCheckoutOpen} = useContext(CheckoutContext);  
+    const {checkout, isLoading} = useCheckout(openCheckoutDate);
+
+    if (isLoading) {
+        return <Loading />
+    }
 
     const closeCheckout = () => {
         setIsCheckoutOpen(false);
+        setOpenCheckoutDate('');
         navigation.goBack();
     }
 
@@ -69,7 +78,7 @@ function Management({navigation}) {
                             />
                         }
                     >
-                        Dia: <Text>{checkoutDate}</Text>
+                        Dia: <Text>{openCheckoutDate}</Text>
                     </CustomText>
                     <CustomText
                         style={styles.headerInfo}
@@ -81,7 +90,7 @@ function Management({navigation}) {
                             />
                         }
                     >
-                        Saldo Inicial: <Text>50</Text>
+                        Saldo Inicial: <Text>{checkout.openBalance}</Text>
                     </CustomText>
                 </View>
             </View>

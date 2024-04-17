@@ -17,7 +17,7 @@ import { CheckoutContext } from "../../context/CheckoutContext";
 import { saveCheckout } from "../../data/dataHandler"
 
 function Home({navigation}) {
-    const {checkoutDate, setCheckoutDate, isCheckoutOpen, setIsCheckoutOpen} = useContext(CheckoutContext);
+    const {openCheckoutDate, setOpenCheckoutDate, isCheckoutOpen, setIsCheckoutOpen} = useContext(CheckoutContext);
 
     const [IsModalVisible, setIsModalVisible] = useState(false);
     const [date, setDate] = useState('');
@@ -30,6 +30,7 @@ function Home({navigation}) {
     const closeModal = () => {
         setIsModalVisible(false);
         resetForm();
+        console.log('closing modal and resetting');
     }
 
     const resetForm = () => {
@@ -37,11 +38,17 @@ function Home({navigation}) {
         setOpenBalance('');
     }
 
-    const confirmCheckout = async () => {
-        const newCheckout = { openBalance }
-        setCheckoutDate(date);
+    const openNewCheckout = async () => {
+        const newCheckout = { openBalance };
+        console.log(`Date before setState ${date}`);
+        await saveCheckout(date, newCheckout);
+        setOpenCheckoutDate(date);
+        console.log(`openCheckoutDate after setState ${openCheckoutDate}`);
         setIsCheckoutOpen(true);
-        await saveCheckout(checkoutDate, newCheckout);
+    }
+
+    const handleConfirm = async () => {
+        openNewCheckout();
         closeModal();
         navigation.navigate("Management");
     }
@@ -129,7 +136,7 @@ function Home({navigation}) {
                     <CustomModal.Action 
                         title="Confirmar" 
                         color={theme.colors.green}
-                        onPress={confirmCheckout}
+                        onPress={handleConfirm}
                     />
                     <CustomModal.Action 
                         title="Cancelar" 
