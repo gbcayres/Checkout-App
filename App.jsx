@@ -16,7 +16,7 @@ import Management from "./src/screens/management";
 import History from "./src/screens/history";
 import Loading from "./src/components/ui/loading";
 
-import { CheckoutProvider } from "./src/context/CheckoutContext";
+import { CheckoutProvider } from "./src/contexts/CheckoutContext";
 
 
 const Stack = createStackNavigator();

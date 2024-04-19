@@ -18,7 +18,11 @@ const styles = StyleSheet.create({
         fontFamily: theme.fontFamily.regular,
         fontStyle: "italic",
     },
+    currentBalanceContainer: {
+        alignItems: "center",
+    },
     currentBalance: {
+        width: "100%",
         fontSize: 24,
         color: theme.colors.white,
         fontFamily: theme.fontFamily.medium,

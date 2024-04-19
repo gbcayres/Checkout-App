@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     textContainer: {
         flexDirection: "row",
         gap: 6,
-        alignItems: "center"
+        alignItems: "baseline"
     },
 })
 
