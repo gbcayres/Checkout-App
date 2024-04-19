@@ -8,7 +8,7 @@ import ModalAction from "./modalAction";
 
 import styles from "./styles";
 
-function CustomModal({ onClose, children, animation }) {
+function CustomModal({ onClose, children, animation, style }) {
     return (
         <Modal
             transparent
@@ -16,7 +16,7 @@ function CustomModal({ onClose, children, animation }) {
             statusBarTranslucent
             onRequestClose={onClose}
         >
-            <View style={styles.modalWrapper}>
+            <View style={[styles.modalWrapper, style]}>
                 <View style={styles.modalContainer}>{children}</View>
             </View>
         </Modal>

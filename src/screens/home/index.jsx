@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { View, Text } from "react-native";
-import { TextInputMask } from "react-native-masked-text";
 
 import Container from "../../components/layout/container";
 import Header from "../../components/layout/header";

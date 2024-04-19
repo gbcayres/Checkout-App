@@ -6,9 +6,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         color: theme.colors.black,
-        fontFamily: theme.fontFamily.medium,
-        textAlign: "center"
-    }
-})
+        fontFamily: theme.fontFamily.bold,
+        textAlign: "center",
+    },
+});
 
 export default styles;
