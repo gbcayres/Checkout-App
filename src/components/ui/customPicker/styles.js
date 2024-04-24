@@ -11,22 +11,18 @@ const styles = StyleSheet.create({
         fontFamily: theme.fontFamily.bold,
         fontSize: 16,
     },
-    inputContainer: {
+    pickerContainer: {
         height: 50,
+        width: "100%",
         flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
-        padding: 8,
-        gap: 12,
+        paddingLeft: 12,
         borderColor: theme.colors.gray_200,
         borderWidth: 3,
         borderRadius: 12,
     },
-    input: {
+    picker: {
         flex: 1,
-        textAlign: "left",
-        fontSize: 20,
-        fontFamily: theme.fontFamily.regular,
     },
 });
 

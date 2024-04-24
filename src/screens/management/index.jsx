@@ -7,6 +7,7 @@ import Main from "../../components/layout/main";
 import Button from "../../components/ui/button";
 import Table from "../../components/table";
 import CustomText from "../../components/ui/customText";
+import NewTransactionModal from "./newTransactionModal";
 
 import { FontAwesome6, Ionicons, Fontisto } from "@expo/vector-icons";
 
@@ -18,6 +19,12 @@ import { saveCheckout, getCheckout } from "../../utils/dataHandler";
 
 function Management({ navigation }) {
     console.log("tela de gerenciamento renderizou");
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+
+    const closeModal = () => setIsModalOpen(false);
 
     const {
         currentCheckoutDate,
@@ -39,27 +46,11 @@ function Management({ navigation }) {
     const tableHead = ["Tipo", "Valor", "Pagamento"];
     const [transactions, setTransactions] = useState([]);
 
-    const createNewTransaction = () => {
-        const newTransaction = [
-            "Entrada",
-            "R$8,00",
-            "Pix",
-            {
-                impressao: {
-                    colorido: false,
-                    tipoFolha: "A4",
-                    quantidade: 30,
-                },
-            },
-        ];
-        return newTransaction;
-    };
-
     const loadCheckoutData = async () => {
         try {
             const loadedCheckout = await getCheckout(currentCheckoutDate);
             setCurrentCheckout(loadedCheckout);
-            setTransactions(loadedCheckout.transactions || null);
+            setTransactions(loadedCheckout.transactions);
         } catch (error) {
             console.log(error);
         }
@@ -78,15 +69,6 @@ function Management({ navigation }) {
         setCurrentCheckout(updatedCheckout);
         console.log(updatedCheckout);
     }, [transactions]);
-
-    const addTransaction = () => {
-        const newTransaction = createNewTransaction();
-        setTransactions((prevTransactions) => [
-            newTransaction,
-            ...prevTransactions,
-        ]);
-        console.log("adding transaction");
-    };
 
     return (
         <Container>
@@ -151,7 +133,7 @@ function Management({ navigation }) {
                         {currentCheckout?.currentBalance}
                     </CustomText>
                 </View>
-                <Button onPress={addTransaction}>
+                <Button onPress={openModal}>
                     <Button.Text>Registrar Transação</Button.Text>
                 </Button>
                 <Button onPress={closeCheckout}>
@@ -163,6 +145,13 @@ function Management({ navigation }) {
                     tableData={transactions}
                 />
             </Main>
+
+            {isModalOpen && (
+                <NewTransactionModal
+                    onClose={closeModal}
+                    setTransactions={setTransactions}
+                />
+            )}
         </Container>
     );
 }

@@ -5,16 +5,14 @@ import Main from "../../components/layout/main";
 import styles from "./styles";
 
 function History() {
-  return (
-    <Container>
-        <Header>
-            <Header.Title>Histórico de Caixas</Header.Title>
-        </Header>
-        <Main>
-            {/* historico de caixas */}
-        </Main>
-    </Container>
-  )
+    return (
+        <Container>
+            <Header>
+                <Header.Title>Histórico de Caixas</Header.Title>
+            </Header>
+            <Main>{/* historico de caixas */}</Main>
+        </Container>
+    );
 }
 
 export default History;

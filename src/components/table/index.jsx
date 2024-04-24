@@ -7,19 +7,21 @@ import TableRow from "./row";
 import styles from "./styles";
 
 function Table({ tableTitle, headerData, tableData }) {
-  return (
-    <View style={styles.tableContainer}>
-      <Text style={styles.tableTitle}>{tableTitle}</Text>
-      <DataTable style={styles.table}>
-        <TableHeader headerData={headerData} />
-        <ScrollView>
-          {tableData.map((rowData, index) => (
-            <TableRow rowData={rowData} key={index} />
-          ))}
-        </ScrollView>
-      </DataTable>
-    </View>
-  );
+    console.log("table data:", tableData);
+
+    return (
+        <View style={styles.tableContainer}>
+            <Text style={styles.tableTitle}>{tableTitle}</Text>
+            <DataTable style={styles.table}>
+                <TableHeader headerData={headerData} />
+                <ScrollView>
+                    {tableData.map((rowData, index) => (
+                        <TableRow rowData={rowData} key={index} />
+                    ))}
+                </ScrollView>
+            </DataTable>
+        </View>
+    );
 }
 
 export default Table;

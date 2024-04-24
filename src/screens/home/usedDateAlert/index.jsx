@@ -6,14 +6,10 @@ import CustomModal from "../../../components/modal";
 
 import { theme } from "../../../theme";
 
-function UsedDataAlert({ setVisible }) {
-    const closeAlert = () => {
-        setVisible(false);
-    };
-
+function UsedDateAlert({ onClose }) {
     return (
         <CustomModal
-            onClose={closeAlert}
+            onClose={onClose}
             animation="slide"
             style={{
                 backgroundColor: "rgba(0, 0, 0, 0.7)",
@@ -32,18 +28,18 @@ function UsedDataAlert({ setVisible }) {
                         textAlign: "center",
                     }}
                 >
-                    You already have a checkout saved on this date.
+                    Você já registrou um caixa nessa data.
                 </Text>
             </CustomModal.Content>
             <CustomModal.Actions>
                 <CustomModal.Action
                     title="Ok"
                     color={theme.colors.yellow}
-                    onPress={closeAlert}
+                    onPress={onClose}
                 />
             </CustomModal.Actions>
         </CustomModal>
     );
 }
 
-export default UsedDataAlert;
+export default UsedDateAlert;

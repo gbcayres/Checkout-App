@@ -22,6 +22,8 @@ function Home({ navigation }) {
 
     const openModal = () => setIsModalVisible(true);
 
+    const closeModal = () => setIsModalVisible(false);
+
     return (
         <Container>
             <Header>
@@ -63,6 +65,7 @@ function Home({ navigation }) {
                 <NewCheckoutModal
                     navigation={navigation}
                     setIsVisible={setIsModalVisible}
+                    onClose={closeModal}
                 />
             )}
         </Container>

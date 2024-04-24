@@ -18,7 +18,7 @@ export async function getCheckout(date) {
     return JSON.parse(checkoutJson);
 }
 
-export async function checkDateIsFree(date) {
+export async function checkIfDateIsFree(date) {
     const savedCheckoutJson = await AsyncStorage.getItem(date);
     const savedCheckout = JSON.parse(savedCheckoutJson);
     if (!savedCheckout) {
