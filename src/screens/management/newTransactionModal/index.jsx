@@ -118,7 +118,7 @@ function NewTransactionModal({ onClose, setTransactions }) {
                                 color="black"
                             />
                         }
-                        selectedValue={newTransaction.type}
+                        selectedValue={newTransaction.payment}
                         onValueChange={handlePayment}
                     >
                         <Picker.Item label="Escolha uma opção" />

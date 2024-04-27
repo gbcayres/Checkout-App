@@ -16,6 +16,10 @@ import { theme } from "../../theme";
 
 import { useCheckoutContext } from "../../contexts/CheckoutContext";
 import { saveCheckout, getCheckout } from "../../utils/dataHandler";
+import {
+    parseMoneyStringToFloat,
+    parseFloatToMoneyString,
+} from "../../utils/formatter";
 
 function Management({ navigation }) {
     console.log("tela de gerenciamento renderizou");
@@ -33,18 +37,83 @@ function Management({ navigation }) {
         setCurrentCheckout,
     } = useCheckoutContext();
 
+    const tableHead = ["Tipo", "Valor", "Pagamento"];
+    const [transactions, setTransactions] = useState([]);
+
     const resetCurrentCheckout = () => {
         setCurrentCheckout(null);
         setCurrentCheckoutDate("");
     };
 
+    const calculateTotalCashIn = () => {
+        let totalCashIn = 0;
+
+        transactions.forEach((transaction) => {
+            if (transaction.type === "Entrada") {
+                totalCashIn += parseMoneyStringToFloat(transaction.value);
+            }
+        });
+
+        return parseFloatToMoneyString(totalCashIn);
+    };
+
+    const calculateTotalCashOut = () => {
+        let totalCashOut = 0;
+
+        transactions.forEach((transaction) => {
+            if (transaction.type === "Saída") {
+                totalCashOut += parseMoneyStringToFloat(transaction.value);
+            }
+        });
+
+        return parseFloatToMoneyString(totalCashOut);
+    };
+
+    const generateFinalCheckout = () => {
+        const finalCheckout = {
+            date: currentCheckout.date,
+            openBalance: currentCheckout.openBalance,
+            transactions: currentCheckout.transactions,
+            totalCashIn: calculateTotalCashIn(),
+            totalCashOut: calculateTotalCashOut(),
+            finalBalance: currentCheckout.currentBalance,
+        };
+        return finalCheckout;
+    };
+
+    const saveFinalCheckout = () => {
+        const finalCheckout = generateFinalCheckout();
+        console.log("depois de criar o final Checkout!:", finalCheckout);
+        saveCheckout(currentCheckoutDate, finalCheckout);
+    };
+
     const closeCheckout = () => {
+        saveFinalCheckout();
         resetCurrentCheckout();
         navigation.goBack();
     };
 
-    const tableHead = ["Tipo", "Valor", "Pagamento"];
-    const [transactions, setTransactions] = useState([]);
+    const calculateCurrentBalance = () => {
+        let newBalance = parseMoneyStringToFloat(currentCheckout.openBalance);
+
+        transactions.forEach((transaction) => {
+            if (transaction.type === "Entrada") {
+                newBalance += parseMoneyStringToFloat(transaction.value);
+                console.log(
+                    "aumentando:",
+                    parseFloatToMoneyString(transaction.value)
+                );
+            } else if (transaction.type === "Saída") {
+                newBalance -= parseMoneyStringToFloat(transaction.value);
+                console.log(
+                    "diminuindo:",
+                    parseFloatToMoneyString(transaction.value)
+                );
+            }
+        });
+
+        return parseFloatToMoneyString(newBalance);
+    };
 
     const loadCheckoutData = async () => {
         try {
@@ -64,10 +133,10 @@ function Management({ navigation }) {
         const updatedCheckout = {
             ...currentCheckout,
             transactions,
+            currentBalance: calculateCurrentBalance(),
         };
         saveCheckout(currentCheckoutDate, updatedCheckout);
         setCurrentCheckout(updatedCheckout);
-        console.log(updatedCheckout);
     }, [transactions]);
 
     return (

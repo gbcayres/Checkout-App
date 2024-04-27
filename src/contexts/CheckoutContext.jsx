@@ -3,8 +3,8 @@ import { createContext, useContext, useState } from "react";
 export const CheckoutContext = createContext(null);
 
 export const CheckoutProvider = ({ children }) => {
-    const [currentCheckoutDate, setCurrentCheckoutDate] = useState("");
     const [currentCheckout, setCurrentCheckout] = useState(null);
+    const [currentCheckoutDate, setCurrentCheckoutDate] = useState("");
 
     return (
         <CheckoutContext.Provider

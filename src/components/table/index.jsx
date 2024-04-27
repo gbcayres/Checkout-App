@@ -7,8 +7,6 @@ import TableRow from "./row";
 import styles from "./styles";
 
 function Table({ tableTitle, headerData, tableData }) {
-    console.log("table data:", tableData);
-
     return (
         <View style={styles.tableContainer}>
             <Text style={styles.tableTitle}>{tableTitle}</Text>

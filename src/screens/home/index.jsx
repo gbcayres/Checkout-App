@@ -50,7 +50,7 @@ function Home({ navigation }) {
                             <Button.Text>Abrir Caixa</Button.Text>
                         </Button>
                     )}
-                    <Button>
+                    <Button onPress={() => navigation.navigate("History")}>
                         <Button.Text>Historico de Caixas</Button.Text>
                         <MaterialIcons
                             name="history"

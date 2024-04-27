@@ -12,7 +12,7 @@ const colors = {
     pink: "#dd5575",
     cyan: "#06bcc1",
     green: "#33FF33",
-    red: "#D63535",
+    red: "#ff0000",
     yellow: "#CCCC19",
 };
 

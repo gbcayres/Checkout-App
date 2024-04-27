@@ -4,16 +4,16 @@ import { theme } from "../../../theme";
 
 const styles = StyleSheet.create({
     inTransaction: {
-        backgroundColor: theme.colors.green
+        backgroundColor: theme.colors.green,
     },
     outTransaction: {
-        backgroundColor: theme.colors.red
+        backgroundColor: theme.colors.red,
     },
     transactionText: {
         fontSize: 18,
         fontFamily: theme.fontFamily.medium,
-        textAlign: "center"
-    }
-})
+        textAlign: "left",
+    },
+});
 
 export default styles;

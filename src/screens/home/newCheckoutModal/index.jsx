@@ -53,6 +53,7 @@ function NewCheckoutModal({ navigation, onClose }) {
 
     const createNewCheckoutAndDate = () => {
         const newCheckout = {
+            date: newCheckoutForm.date,
             openBalance: newCheckoutForm.openBalance,
             currentBalance: newCheckoutForm.openBalance,
             transactions: [],

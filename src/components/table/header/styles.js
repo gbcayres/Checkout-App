@@ -12,9 +12,8 @@ const styles = StyleSheet.create({
         fontFamily: theme.fontFamily.bold,
         color: theme.colors.white,
         fontSize: 14,
-        // padding: 8,
-        textAlign: "center"
-    }
-})
+        textAlign: "center",
+    },
+});
 
 export default styles;
