@@ -1,5 +1,4 @@
 export function parseMoneyStringToFloat(stringValue) {
-    "R$1.000,00";
     const formattedString = stringValue
         .replace("R$", "")
         .replace(".", "")
