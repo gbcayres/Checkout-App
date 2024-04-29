@@ -3,10 +3,9 @@
 A proposta do projeto extensionista é por em prática tudo oque aprendemos no período lidando com problemas e demandas reais de uma parte interessada, que deve ser uma empresa real. Nossa passe interessada foi a gráfica da universidade, conversamos sobre como funcionava o negócio para explorar as opções e possíveis soluções que uma aplicação móvel poderia oferecer. Decidimos desenvolver um simples aplicativo de caixa, que substituiria cadernos personalizados onde eram registradas as vendas.
 
 ## Tecnologias Usadas
-* React Native
-* Expo
-* React Navigation
-* Async Storage
+* <a href="https://reactnative.dev/">React Native</a>
+* <a href="https://expo.dev/">Expo</a>
+* <a href="https://reactnavigation.org/">React Navigation</a>
 
 ***
 
