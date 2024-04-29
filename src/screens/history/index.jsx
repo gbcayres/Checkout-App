@@ -17,32 +17,12 @@ import { theme } from "../../theme";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import { getAllCheckouts } from "../../utils/dataHandler";
-import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import useCheckouts from "../../hooks/useCheckouts";
 
 function History({ navigation }) {
     console.log("tela history renderizou");
 
-    const [checkouts, setCheckouts] = useState(null);
-
-    useEffect(() => {
-        const fetchCheckouts = async () => {
-            try {
-                const checkouts = await getAllCheckouts();
-                setCheckouts(checkouts);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchCheckouts();
-    }, []);
-
-    const cleanCheckouts = () => {
-        AsyncStorage.clear();
-        setCheckouts(null);
-    };
+    const { checkouts, cleanCheckouts } = useCheckouts();
 
     return (
         <Container>
@@ -70,21 +50,12 @@ function History({ navigation }) {
                         <Text style={styles.historyTitle}>
                             Caixas Registrados
                         </Text>
-                        {/* <ScrollView> */}
                         <FlatList
                             data={checkouts}
                             renderItem={({ item }) => (
                                 <Checkout checkoutData={item} />
                             )}
                         />
-                        {/* {checkouts &&
-                                checkouts.map((checkout) => (
-                                    <Checkout
-                                        checkoutData={checkout}
-                                        key={checkout.date}
-                                    />
-                                ))} */}
-                        {/* </ScrollView> */}
                     </View>
                 ) : (
                     <Text style={styles.emptyMessage}>
