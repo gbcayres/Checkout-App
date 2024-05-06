@@ -34,7 +34,7 @@ function CleanCheckoutsModal({ onClose, onConfirm }) {
                 <CustomModal.Action
                     title="Limpar"
                     color={theme.colors.blue}
-                    onPress={onConfirm}
+                    onPress={handleConfirm}
                 />
                 <CustomModal.Action
                     title="Cancelar"
