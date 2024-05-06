@@ -1,13 +1,13 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
-import { theme } from "../../theme";
+import { theme } from '../../theme'
 
 const styles = StyleSheet.create({
     backContainer: {
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        alignItems: "center",
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
         gap: 45,
     },
     backMessage: {
@@ -16,12 +16,12 @@ const styles = StyleSheet.create({
     },
     checkoutsContainer: {
         flex: 1,
-        width: "100%",
-        overflow: "hidden",
+        width: '100%',
+        overflow: 'hidden',
     },
     historyTitle: {
-        width: "100%",
-        textAlign: "center",
+        width: '100%',
+        textAlign: 'center',
         fontSize: 20,
         backgroundColor: theme.colors.gray_600,
         fontFamily: theme.fontFamily.medium,
@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     emptyMessage: {
-        textAlign: "center",
+        textAlign: 'center',
         fontSize: 20,
         color: theme.colors.white,
         fontFamily: theme.fontFamily.medium,
     },
-});
+})
 
-export default styles;
+export default styles

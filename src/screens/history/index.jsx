@@ -1,28 +1,28 @@
-import {
-    ScrollView,
-    View,
-    TouchableOpacity,
-    Text,
-    FlatList,
-} from "react-native";
+import { View, TouchableOpacity, Text, FlatList } from 'react-native'
 
-import Container from "../../components/layout/container";
-import Header from "../../components/layout/header";
-import Main from "../../components/layout/main";
-import Checkout from "./checkout";
-import Button from "./../../components/ui/button";
+import Container from '../../components/layout/container'
+import Header from '../../components/layout/header'
+import Main from '../../components/layout/main'
+import Checkout from './checkout'
+import Button from './../../components/ui/button'
+import CleanCheckoutsModal from './cleanCheckoutsAlert'
 
-import styles from "./styles";
-import { theme } from "../../theme";
+import styles from './styles'
+import { theme } from '../../theme'
 
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons'
 
-import useCheckouts from "../../hooks/useCheckouts";
+import useCheckouts from '../../hooks/useCheckouts'
+import { useState } from 'react'
 
 function History({ navigation }) {
-    console.log("tela history renderizou");
+    console.log('tela history renderizou')
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const { checkouts, cleanCheckouts } = useCheckouts()
 
-    const { checkouts, cleanCheckouts } = useCheckouts();
+    const openModal = () => setIsModalOpen(true)
+
+    const closeModal = () => setIsModalOpen(false)
 
     return (
         <Container>
@@ -44,7 +44,7 @@ function History({ navigation }) {
             <Main>
                 {checkouts && checkouts.length > 0 ? (
                     <View style={styles.checkoutsContainer}>
-                        <Button onPress={cleanCheckouts}>
+                        <Button onPress={openModal}>
                             <Button.Text>Limpar Registros</Button.Text>
                         </Button>
                         <Text style={styles.historyTitle}>
@@ -63,8 +63,15 @@ function History({ navigation }) {
                     </Text>
                 )}
             </Main>
+
+            {isModalOpen && (
+                <CleanCheckoutsModal
+                    onClose={closeModal}
+                    onConfirm={cleanCheckouts}
+                />
+            )}
         </Container>
-    );
+    )
 }
 
-export default History;
+export default History

@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
-import { theme } from "../../../theme";
+import { theme } from '../../../theme'
 
 const styles = StyleSheet.create({
     container: {
@@ -9,4 +9,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default styles;
+export default styles

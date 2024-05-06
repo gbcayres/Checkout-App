@@ -1,32 +1,32 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
-import { theme } from "../../theme";
+import { theme } from '../../theme'
 
 const styles = StyleSheet.create({
     headerSection: {
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-around",
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     headerInfoContainer: {
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     headerInfo: {
         fontSize: 18,
         color: theme.colors.white,
         fontFamily: theme.fontFamily.regular,
-        fontStyle: "italic",
+        fontStyle: 'italic',
     },
     currentBalanceContainer: {
-        alignItems: "center",
+        alignItems: 'center',
     },
     currentBalance: {
-        width: "100%",
+        width: '100%',
         fontSize: 24,
         color: theme.colors.white,
         fontFamily: theme.fontFamily.medium,
-        textAlign: "center",
+        textAlign: 'center',
     },
     currentBalanceValue: {
         fontSize: 28,
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default styles;
+export default styles

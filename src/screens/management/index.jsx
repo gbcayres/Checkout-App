@@ -1,73 +1,79 @@
-import { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { useEffect, useState } from 'react'
+import { Text, View, TouchableOpacity } from 'react-native'
 
-import Container from "../../components/layout/container";
-import Header from "../../components/layout/header";
-import Main from "../../components/layout/main";
-import Button from "../../components/ui/button";
-import Table from "../../components/table";
-import CustomText from "../../components/ui/customText";
-import NewTransactionModal from "./newTransactionModal";
+import Container from '../../components/layout/container'
+import Header from '../../components/layout/header'
+import Main from '../../components/layout/main'
+import Button from '../../components/ui/button'
+import Table from '../../components/table'
+import CustomText from '../../components/ui/customText'
+import NewTransactionModal from './newTransactionModal'
+import CloseCheckoutAlert from './closeCheckoutAlert'
 
-import { FontAwesome6, Ionicons, Fontisto } from "@expo/vector-icons";
+import { FontAwesome6, Ionicons, Fontisto } from '@expo/vector-icons'
 
-import styles from "./styles";
-import { theme } from "../../theme";
+import styles from './styles'
+import { theme } from '../../theme'
 
-import { useCheckoutContext } from "../../contexts/CheckoutContext";
-import { saveCheckout, getCheckout } from "../../utils/dataHandler";
+import { useCheckoutContext } from '../../contexts/CheckoutContext'
+import { saveCheckout, getCheckout } from '../../utils/dataHandler'
 import {
     parseMoneyStringToFloat,
     parseFloatToMoneyString,
-} from "../../utils/formatter";
+} from '../../utils/formatter'
 
 function Management({ navigation }) {
-    console.log("tela de gerenciamento renderizou");
+    console.log('tela de gerenciamento renderizou')
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isAlertOpen, setIsAlertOpen] = useState(false)
 
-    const openModal = () => setIsModalOpen(true);
+    const openModal = () => setIsModalOpen(true)
 
-    const closeModal = () => setIsModalOpen(false);
+    const closeModal = () => setIsModalOpen(false)
+
+    const openAlert = () => setIsAlertOpen(true)
+
+    const closeAlert = () => setIsAlertOpen(false)
 
     const {
         currentCheckoutDate,
         setCurrentCheckoutDate,
         currentCheckout,
         setCurrentCheckout,
-    } = useCheckoutContext();
+    } = useCheckoutContext()
 
-    const tableHead = ["Tipo", "Valor", "Pagamento"];
-    const [transactions, setTransactions] = useState([]);
+    const tableHead = ['Tipo', 'Valor', 'Pagamento']
+    const [transactions, setTransactions] = useState([])
 
     const resetCurrentCheckout = () => {
-        setCurrentCheckout(null);
-        setCurrentCheckoutDate("");
-    };
+        setCurrentCheckout(null)
+        setCurrentCheckoutDate('')
+    }
 
     const calculateTotalCashIn = () => {
-        let totalCashIn = 0;
+        let totalCashIn = 0
 
         transactions.forEach((transaction) => {
-            if (transaction.type === "Entrada") {
-                totalCashIn += parseMoneyStringToFloat(transaction.value);
+            if (transaction.type === 'Entrada') {
+                totalCashIn += parseMoneyStringToFloat(transaction.value)
             }
-        });
+        })
 
-        return parseFloatToMoneyString(totalCashIn);
-    };
+        return parseFloatToMoneyString(totalCashIn)
+    }
 
     const calculateTotalCashOut = () => {
-        let totalCashOut = 0;
+        let totalCashOut = 0
 
         transactions.forEach((transaction) => {
-            if (transaction.type === "Saída") {
-                totalCashOut += parseMoneyStringToFloat(transaction.value);
+            if (transaction.type === 'Saída') {
+                totalCashOut += parseMoneyStringToFloat(transaction.value)
             }
-        });
+        })
 
-        return parseFloatToMoneyString(totalCashOut);
-    };
+        return parseFloatToMoneyString(totalCashOut)
+    }
 
     const generateFinalCheckout = () => {
         const finalCheckout = {
@@ -77,67 +83,67 @@ function Management({ navigation }) {
             totalCashIn: calculateTotalCashIn(),
             totalCashOut: calculateTotalCashOut(),
             finalBalance: currentCheckout.currentBalance,
-        };
-        return finalCheckout;
-    };
+        }
+        return finalCheckout
+    }
 
     const saveFinalCheckout = () => {
-        const finalCheckout = generateFinalCheckout();
-        console.log("depois de criar o final Checkout!:", finalCheckout);
-        saveCheckout(currentCheckoutDate, finalCheckout);
-    };
+        const finalCheckout = generateFinalCheckout()
+        console.log('depois de criar o final Checkout!:', finalCheckout)
+        saveCheckout(currentCheckoutDate, finalCheckout)
+    }
 
     const closeCheckout = () => {
-        saveFinalCheckout();
-        resetCurrentCheckout();
-        navigation.goBack();
-    };
+        saveFinalCheckout()
+        resetCurrentCheckout()
+        navigation.goBack()
+    }
 
     const calculateCurrentBalance = () => {
-        let newBalance = parseMoneyStringToFloat(currentCheckout.openBalance);
+        let newBalance = parseMoneyStringToFloat(currentCheckout.openBalance)
 
         transactions.forEach((transaction) => {
-            if (transaction.type === "Entrada") {
-                newBalance += parseMoneyStringToFloat(transaction.value);
+            if (transaction.type === 'Entrada') {
+                newBalance += parseMoneyStringToFloat(transaction.value)
                 console.log(
-                    "aumentando:",
+                    'aumentando:',
                     parseFloatToMoneyString(transaction.value)
-                );
-            } else if (transaction.type === "Saída") {
-                newBalance -= parseMoneyStringToFloat(transaction.value);
+                )
+            } else if (transaction.type === 'Saída') {
+                newBalance -= parseMoneyStringToFloat(transaction.value)
                 console.log(
-                    "diminuindo:",
+                    'diminuindo:',
                     parseFloatToMoneyString(transaction.value)
-                );
+                )
             }
-        });
+        })
 
-        return parseFloatToMoneyString(newBalance);
-    };
+        return parseFloatToMoneyString(newBalance)
+    }
 
     const loadCheckoutData = async () => {
         try {
-            const loadedCheckout = await getCheckout(currentCheckoutDate);
-            setCurrentCheckout(loadedCheckout);
-            setTransactions(loadedCheckout.transactions);
+            const loadedCheckout = await getCheckout(currentCheckoutDate)
+            setCurrentCheckout(loadedCheckout)
+            setTransactions(loadedCheckout.transactions)
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
-    };
+    }
 
     useEffect(() => {
-        loadCheckoutData();
-    }, []);
+        loadCheckoutData()
+    }, [])
 
     useEffect(() => {
         const updatedCheckout = {
             ...currentCheckout,
             transactions,
             currentBalance: calculateCurrentBalance(),
-        };
-        saveCheckout(currentCheckoutDate, updatedCheckout);
-        setCurrentCheckout(updatedCheckout);
-    }, [transactions]);
+        }
+        saveCheckout(currentCheckoutDate, updatedCheckout)
+        setCurrentCheckout(updatedCheckout)
+    }, [transactions])
 
     return (
         <Container>
@@ -205,7 +211,7 @@ function Management({ navigation }) {
                 <Button onPress={openModal}>
                     <Button.Text>Registrar Transação</Button.Text>
                 </Button>
-                <Button onPress={closeCheckout}>
+                <Button onPress={openAlert}>
                     <Button.Text>Fechar Caixa</Button.Text>
                 </Button>
                 <Table
@@ -221,8 +227,14 @@ function Management({ navigation }) {
                     setTransactions={setTransactions}
                 />
             )}
+            {isAlertOpen && (
+                <CloseCheckoutAlert
+                    onClose={closeAlert}
+                    onConfirm={closeCheckout}
+                />
+            )}
         </Container>
-    );
+    )
 }
 
-export default Management;
+export default Management

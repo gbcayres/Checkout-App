@@ -1,55 +1,55 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import CustomModal from "../../../components/modal";
-import CustomInput from "../../../components/ui/customInput";
-import UsedDateAlert from "../usedDateAlert";
+import CustomModal from '../../../components/modal'
+import CustomInput from '../../../components/ui/customInput'
+import UsedDateAlert from '../usedDateAlert'
 
-import { theme } from "../../../theme";
+import { theme } from '../../../theme'
 
-import { FontAwesome6 } from "@expo/vector-icons";
+import { FontAwesome6 } from '@expo/vector-icons'
 
-import { useCheckoutContext } from "../../../contexts/CheckoutContext";
-import { saveCheckout, checkIfDateIsFree } from "../../../utils/dataHandler";
+import { useCheckoutContext } from '../../../contexts/CheckoutContext'
+import { saveCheckout, checkIfDateIsFree } from '../../../utils/dataHandler'
 
 function NewCheckoutModal({ navigation, onClose }) {
-    const { setCurrentCheckout, setCurrentCheckoutDate } = useCheckoutContext();
+    const { setCurrentCheckout, setCurrentCheckoutDate } = useCheckoutContext()
 
-    const [isAlertVisible, setIsAlertVisible] = useState(false);
+    const [isAlertVisible, setIsAlertVisible] = useState(false)
 
     const [newCheckoutForm, setNewCheckoutForm] = useState({
-        date: "",
-        openBalance: "",
-    });
+        date: '',
+        openBalance: '',
+    })
 
-    const showAlert = () => setIsAlertVisible(true);
+    const showAlert = () => setIsAlertVisible(true)
 
-    const closeAlert = () => setIsAlertVisible(false);
+    const closeAlert = () => setIsAlertVisible(false)
 
     const handleDate = (text) => {
         setNewCheckoutForm((prev) => ({
             ...prev,
             date: text,
-        }));
-    };
+        }))
+    }
 
     const handleOpenBalance = (text) => {
         setNewCheckoutForm((prev) => ({
             ...prev,
             openBalance: text,
-        }));
-    };
+        }))
+    }
 
     const resetForm = () => {
         setNewCheckoutForm({
-            date: "",
-            openBalance: "",
-        });
-    };
+            date: '',
+            openBalance: '',
+        })
+    }
 
     const handleClose = () => {
-        onClose(false);
-        resetForm();
-    };
+        onClose(false)
+        resetForm()
+    }
 
     const createNewCheckoutAndDate = () => {
         const newCheckout = {
@@ -57,35 +57,35 @@ function NewCheckoutModal({ navigation, onClose }) {
             openBalance: newCheckoutForm.openBalance,
             currentBalance: newCheckoutForm.openBalance,
             transactions: [],
-        };
-        const newCheckoutDate = newCheckoutForm.date;
-        return [newCheckoutDate, newCheckout];
-    };
+        }
+        const newCheckoutDate = newCheckoutForm.date
+        return [newCheckoutDate, newCheckout]
+    }
 
     const updateCheckoutContext = (newCheckoutDate, newCheckout) => {
-        setCurrentCheckoutDate(newCheckoutDate);
-        setCurrentCheckout(newCheckout);
-    };
+        setCurrentCheckoutDate(newCheckoutDate)
+        setCurrentCheckout(newCheckout)
+    }
 
     const openNewCheckout = async (newCheckoutDate, newCheckout) => {
-        await saveCheckout(newCheckoutDate, newCheckout);
-        updateCheckoutContext(newCheckoutDate, newCheckout);
-    };
+        await saveCheckout(newCheckoutDate, newCheckout)
+        updateCheckoutContext(newCheckoutDate, newCheckout)
+    }
 
     const handleConfirm = async () => {
-        const [newCheckoutDate, newCheckout] = createNewCheckoutAndDate();
-        console.log(newCheckoutDate, newCheckout);
-        const dateIsFree = await checkIfDateIsFree(newCheckoutDate);
-        console.log(dateIsFree);
+        const [newCheckoutDate, newCheckout] = createNewCheckoutAndDate()
+        console.log(newCheckoutDate, newCheckout)
+        const dateIsFree = await checkIfDateIsFree(newCheckoutDate)
+        console.log(dateIsFree)
         if (!dateIsFree) {
-            showAlert();
-            return;
+            showAlert()
+            return
         }
 
-        await openNewCheckout(newCheckoutDate, newCheckout);
-        handleClose();
-        navigation.navigate("Management");
-    };
+        await openNewCheckout(newCheckoutDate, newCheckout)
+        handleClose()
+        navigation.navigate('Management')
+    }
 
     return (
         <>
@@ -106,7 +106,7 @@ function NewCheckoutModal({ navigation, onClose }) {
                         placeholder="DD/MM/YYYY"
                         type="datetime"
                         options={{
-                            format: "DD/MM/YYYY",
+                            format: 'DD/MM/YYYY',
                         }}
                     />
                     <CustomInput
@@ -124,9 +124,9 @@ function NewCheckoutModal({ navigation, onClose }) {
                         type="money"
                         options={{
                             precision: 2,
-                            separator: ",",
-                            delimiter: ".",
-                            unit: "R$",
+                            separator: ',',
+                            delimiter: '.',
+                            unit: 'R$',
                         }}
                     />
                 </CustomModal.Content>
@@ -146,7 +146,7 @@ function NewCheckoutModal({ navigation, onClose }) {
 
             {isAlertVisible && <UsedDateAlert onClose={closeAlert} />}
         </>
-    );
+    )
 }
 
-export default NewCheckoutModal;
+export default NewCheckoutModal
