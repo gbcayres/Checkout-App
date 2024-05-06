@@ -23,7 +23,7 @@ Esses foram os pontos que julgamos necessários para entregar o Produto Mínimo 
 ## Diagrama de Casos de Uso
 Um diagrama de casos de uso é uma representação visual que descreve os comportamentos e funcionalidades do sistema, as interações entre os atores (no caso o usuário) e o sistema.
 
-![DiagramaCasosDeUso](Diagrama.png)
+![DiagramaCasosDeUso](prints/useCasesDiagram.png)
 
 ## Fluxos de Evento
 Fluxos de Evento são ações que ocorrem em sequência no sistema em resposta a interações.
