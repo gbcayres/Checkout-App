@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { TouchableOpacity, View, Text } from "react-native";
+import { useState } from 'react'
+import { TouchableOpacity, View, Text } from 'react-native'
 
-import CustomModal from "../../../components/modal";
+import CustomModal from '../../../components/modal'
 
-import styles from "./styles";
-import { theme } from "../../../theme";
+import styles from './styles'
+import { theme } from '../../../theme'
 
 function Checkout({ checkoutData }) {
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false)
 
     const openModal = () => {
-        setIsModalVisible(true);
-    };
+        setIsModalVisible(true)
+    }
 
     const closeModal = () => {
-        setIsModalVisible(false);
-    };
+        setIsModalVisible(false)
+    }
 
     return (
         <TouchableOpacity
@@ -99,7 +99,7 @@ function Checkout({ checkoutData }) {
                 </CustomModal>
             )}
         </TouchableOpacity>
-    );
+    )
 }
 
-export default Checkout;
+export default Checkout

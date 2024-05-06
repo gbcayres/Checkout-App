@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
-import { getAllCheckouts } from "../utils/dataHandler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from 'react'
+import { getAllCheckouts } from '../utils/dataHandler'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const useCheckouts = () => {
-    const [checkouts, setCheckouts] = useState(null);
+    const [checkouts, setCheckouts] = useState(null)
 
     useEffect(() => {
         const fetchCheckouts = async () => {
             try {
-                const checkouts = await getAllCheckouts();
-                setCheckouts(checkouts);
+                const checkouts = await getAllCheckouts()
+                setCheckouts(checkouts)
             } catch (error) {
-                console.log(error);
+                console.log(error)
             }
-        };
+        }
 
-        fetchCheckouts();
-    }, []);
+        fetchCheckouts()
+    }, [])
 
     const cleanCheckouts = () => {
-        AsyncStorage.clear();
-        setCheckouts(null);
-    };
+        AsyncStorage.clear()
+        setCheckouts(null)
+    }
 
-    return { checkouts, cleanCheckouts };
-};
+    return { checkouts, cleanCheckouts }
+}
 
-export default useCheckouts;
+export default useCheckouts

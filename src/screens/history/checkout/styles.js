@@ -1,46 +1,47 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View } from 'react-native'
 
-import { theme } from "../../../theme";
+import { theme } from '../../../theme'
 
 const styles = StyleSheet.create({
     checkout: {
         backgroundColor: theme.colors.white,
         borderWidth: 3,
         borderRadius: 10,
-        overflow: "hidden",
+        overflow: 'hidden',
         marginBottom: 5,
     },
     date: {
-        textAlign: "center",
+        textAlign: 'center',
         padding: 2,
         fontFamily: theme.fontFamily.bold,
+        borderBottomColor: theme.colors.black,
+        borderBottomWidth: 3,
         fontSize: 20,
         color: theme.colors.black,
     },
     checkoutInfoContainer: {
-        flexDirection: "row",
-        backgroundColor: theme.colors.gray_400,
+        flexDirection: 'row',
         padding: 8,
     },
     checkoutInfo: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     inLabel: {
-        textAlign: "center",
+        textAlign: 'center',
         fontFamily: theme.fontFamily.bold,
         fontSize: 16,
         color: theme.colors.green,
     },
     outLabel: {
-        textAlign: "center",
+        textAlign: 'center',
         fontFamily: theme.fontFamily.bold,
         fontSize: 16,
         color: theme.colors.red,
     },
     balanceLabel: {
-        textAlign: "center",
+        textAlign: 'center',
         fontFamily: theme.fontFamily.bold,
         fontSize: 16,
         color: theme.colors.black,
@@ -51,10 +52,10 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         gap: 4,
-        textAlign: "center",
+        textAlign: 'center',
     },
     modalInfoContainer: {
-        flexDirection: "row",
+        flexDirection: 'row',
         gap: 4,
     },
     modalInfoLabel: {
@@ -65,6 +66,6 @@ const styles = StyleSheet.create({
         fontFamily: theme.fontFamily.regular,
         fontSize: 18,
     },
-});
+})
 
-export default styles;
+export default styles

@@ -1,15 +1,15 @@
 export function parseMoneyStringToFloat(stringValue) {
     const formattedString = stringValue
-        .replace("R$", "")
-        .replace(".", "")
-        .replace(",", ".");
-    const floatValue = parseFloat(formattedString);
-    return floatValue;
+        .replace('R$', '')
+        .replace('.', '')
+        .replace(',', '.')
+    const floatValue = parseFloat(formattedString)
+    return floatValue
 }
 
 export function parseFloatToMoneyString(floatNumber) {
-    const formattedNumber = floatNumber.toLocaleString("pt-BR", {
+    const formattedNumber = floatNumber.toLocaleString('pt-BR', {
         minimumFractionDigits: 2,
-    });
-    return `R$${formattedNumber}`;
+    })
+    return `R$${formattedNumber}`
 }

@@ -1,28 +1,28 @@
-import { useState, useContext } from "react";
-import { View, Text } from "react-native";
+import { useState, useContext } from 'react'
+import { View, Text } from 'react-native'
 
-import Container from "../../components/layout/container";
-import Header from "../../components/layout/header";
-import Main from "../../components/layout/main";
-import Button from "../../components/ui/button";
-import NewCheckoutModal from "./newCheckoutModal";
+import Container from '../../components/layout/container'
+import Header from '../../components/layout/header'
+import Main from '../../components/layout/main'
+import Button from '../../components/ui/button'
+import NewCheckoutModal from './newCheckoutModal'
 
-import { MaterialIcons, FontAwesome6 } from "@expo/vector-icons";
+import { MaterialIcons, FontAwesome6 } from '@expo/vector-icons'
 
-import styles from "./styles";
-import { theme } from "../../theme";
+import styles from './styles'
+import { theme } from '../../theme'
 
-import { useCheckoutContext } from "../../contexts/CheckoutContext";
+import { useCheckoutContext } from '../../contexts/CheckoutContext'
 
 function Home({ navigation }) {
-    console.log("tela home renderizou");
-    const { currentCheckout } = useCheckoutContext();
+    console.log('tela home renderizou')
+    const { currentCheckout } = useCheckoutContext()
 
-    const [IsModalVisible, setIsModalVisible] = useState(false);
+    const [IsModalVisible, setIsModalVisible] = useState(false)
 
-    const openModal = () => setIsModalVisible(true);
+    const openModal = () => setIsModalVisible(true)
 
-    const closeModal = () => setIsModalVisible(false);
+    const closeModal = () => setIsModalVisible(false)
 
     return (
         <Container>
@@ -41,7 +41,7 @@ function Home({ navigation }) {
                 <View style={styles.buttonContainer}>
                     {currentCheckout ? (
                         <Button
-                            onPress={() => navigation.navigate("Management")}
+                            onPress={() => navigation.navigate('Management')}
                         >
                             <Button.Text>Gerenciar Caixa</Button.Text>
                         </Button>
@@ -50,7 +50,7 @@ function Home({ navigation }) {
                             <Button.Text>Abrir Caixa</Button.Text>
                         </Button>
                     )}
-                    <Button onPress={() => navigation.navigate("History")}>
+                    <Button onPress={() => navigation.navigate('History')}>
                         <Button.Text>Historico de Caixas</Button.Text>
                         <MaterialIcons
                             name="history"
@@ -69,7 +69,7 @@ function Home({ navigation }) {
                 />
             )}
         </Container>
-    );
+    )
 }
 
-export default Home;
+export default Home

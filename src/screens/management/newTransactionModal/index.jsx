@@ -1,69 +1,69 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import CustomModal from "../../../components/modal";
-import CustomInput from "../../../components/ui/customInput";
-import CustomPicker from "../../../components/ui/customPicker";
-import { Picker } from "@react-native-picker/picker";
+import CustomModal from '../../../components/modal'
+import CustomInput from '../../../components/ui/customInput'
+import CustomPicker from '../../../components/ui/customPicker'
+import { Picker } from '@react-native-picker/picker'
 
-import { theme } from "../../../theme";
+import { theme } from '../../../theme'
 
-import { FontAwesome6, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome6, FontAwesome, MaterialIcons } from '@expo/vector-icons'
 
 function NewTransactionModal({ onClose, setTransactions }) {
     const [newTransaction, setNewTransaction] = useState({
-        type: "",
-        value: "",
-        payment: "",
-    });
+        type: '',
+        value: '',
+        payment: '',
+    })
 
-    console.log(newTransaction);
+    console.log(newTransaction)
 
     const resetForm = () => {
         setNewTransaction({
-            type: "",
-            value: "",
-            payment: "",
-        });
-    };
+            type: '',
+            value: '',
+            payment: '',
+        })
+    }
 
     const closeModal = () => {
-        onClose();
-        resetForm();
-    };
+        onClose()
+        resetForm()
+    }
 
     const handleType = (text) => {
         setNewTransaction((prevTransaction) => ({
             ...prevTransaction,
             type: text,
-        }));
-    };
+        }))
+    }
 
     const handleValue = (text) => {
         setNewTransaction((prevTransaction) => ({
             ...prevTransaction,
             value: text,
-        }));
-    };
+        }))
+    }
 
     const handlePayment = (text) => {
         setNewTransaction((prevTransaction) => ({
             ...prevTransaction,
             payment: text,
-        }));
-    };
+        }))
+    }
 
     const addTransaction = () => {
         setTransactions((prevTransactions) => [
             newTransaction,
             ...prevTransactions,
-        ]);
-        console.log("adding transaction:", newTransaction);
-    };
+        ])
+        console.log('adding transaction:', newTransaction)
+    }
 
     const handleConfirm = () => {
-        addTransaction();
-        closeModal();
-    };
+        addTransaction()
+        closeModal()
+    }
 
     return (
         <>
@@ -104,9 +104,9 @@ function NewTransactionModal({ onClose, setTransactions }) {
                         type="money"
                         options={{
                             precision: 2,
-                            separator: ",",
-                            delimiter: ".",
-                            unit: "R$",
+                            separator: ',',
+                            delimiter: '.',
+                            unit: 'R$',
                         }}
                     />
                     <CustomPicker
@@ -142,7 +142,7 @@ function NewTransactionModal({ onClose, setTransactions }) {
                 </CustomModal.Actions>
             </CustomModal>
         </>
-    );
+    )
 }
 
-export default NewTransactionModal;
+export default NewTransactionModal
