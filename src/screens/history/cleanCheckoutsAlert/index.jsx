@@ -16,7 +16,7 @@ function CleanCheckoutsModal({ onClose, onConfirm }) {
         <CustomModal onClose={onClose} animation="fade">
             <CustomModal.Header>
                 <CustomModal.Title>Atenção!</CustomModal.Title>
-                <Ionicons name="alert-sharp" size={24} color="black" />
+                <Ionicons name="alert-sharp" size={20} color="black" />
             </CustomModal.Header>
             <CustomModal.Content>
                 <Text
