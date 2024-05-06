@@ -34,7 +34,7 @@ Fluxos de Evento são ações que ocorrem em sequência no sistema em resposta a
   
 * O sistema solicita informações necessárias (dia e caixa inicial).
 * O usuário insere as informações.
-<img src="prints/default/newCheckoutModal.png" width="300" margin="0 auto">
+<img src="prints/newCheckoutModal.png" width="300" >
 
 * O sistema verifica se já não há um caixa registrado naquele dia.
 <img src="prints/dateAlert.png" width="300">
