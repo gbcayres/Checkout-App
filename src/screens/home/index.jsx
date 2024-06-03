@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 
 import Container from '../../components/layout/container'
@@ -13,16 +13,36 @@ import styles from './styles'
 import { theme } from '../../theme'
 
 import { useCheckoutContext } from '../../contexts/CheckoutContext'
+import { hasWppNumber } from '../../utils/whatsapp'
+import SaveNumberModal from './saveNumberModal'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function Home({ navigation }) {
     console.log('tela home renderizou')
     const { currentCheckout } = useCheckoutContext()
 
-    const [IsModalVisible, setIsModalVisible] = useState(false)
+    const [IsCheckoutModalVisible, setIsCheckoutModalVisible] = useState(false)
 
-    const openModal = () => setIsModalVisible(true)
+    const [IsNumberModalVisible, setIsNumberModalVisible] = useState(false)
 
-    const closeModal = () => setIsModalVisible(false)
+    const openModal = () => setIsCheckoutModalVisible(true)
+
+    const closeModal = () => setIsCheckoutModalVisible(false)
+
+    const openSaveNumberModal = () => setIsNumberModalVisible(true)
+
+    const closeSaveNumberModal = () => setIsNumberModalVisible(false)
+
+    useEffect(() => {
+        const checkWppNumber = async () => {
+            const hasNumber = await hasWppNumber()
+            if (!hasNumber) {
+                console.log('nao tem numero')
+                openSaveNumberModal()
+            }
+        }
+        checkWppNumber()
+    }, [])
 
     return (
         <Container>
@@ -61,10 +81,13 @@ function Home({ navigation }) {
                 </View>
             </Main>
 
-            {IsModalVisible && (
+            {IsNumberModalVisible && (
+                <SaveNumberModal onClose={closeSaveNumberModal} />
+            )}
+
+            {IsCheckoutModalVisible && (
                 <NewCheckoutModal
                     navigation={navigation}
-                    setIsVisible={setIsModalVisible}
                     onClose={closeModal}
                 />
             )}

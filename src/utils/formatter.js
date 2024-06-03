@@ -13,3 +13,7 @@ export function parseFloatToMoneyString(floatNumber) {
     })
     return `R$${formattedNumber}`
 }
+
+export function formatWppNumber(rawNumber) {
+    return rawNumber.replace(/[^\d]/g, '')
+}

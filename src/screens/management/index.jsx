@@ -21,20 +21,19 @@ import {
     parseMoneyStringToFloat,
     parseFloatToMoneyString,
 } from '../../utils/formatter'
+import { sendReport } from '../../utils/whatsapp'
 
 function Management({ navigation }) {
-    console.log('tela de gerenciamento renderizou')
+    const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false)
+    const [isDateAlertOpen, setIsDateAlertOpen] = useState(false)
 
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [isAlertOpen, setIsAlertOpen] = useState(false)
+    const openTransactionModal = () => setIsTransactionModalOpen(true)
 
-    const openModal = () => setIsModalOpen(true)
+    const closeTransactionModal = () => setIsTransactionModalOpen(false)
 
-    const closeModal = () => setIsModalOpen(false)
+    const openDateAlert = () => setIsDateAlertOpen(true)
 
-    const openAlert = () => setIsAlertOpen(true)
-
-    const closeAlert = () => setIsAlertOpen(false)
+    const closeDateAlert = () => setIsDateAlertOpen(false)
 
     const {
         currentCheckoutDate,
@@ -89,14 +88,23 @@ function Management({ navigation }) {
 
     const saveFinalCheckout = () => {
         const finalCheckout = generateFinalCheckout()
-        console.log('depois de criar o final Checkout!:', finalCheckout)
-        saveCheckout(currentCheckoutDate, finalCheckout)
+        try {
+            saveCheckout(currentCheckoutDate, finalCheckout)
+            sendReport(finalCheckout)
+        } catch (error) {
+            setError(error.message)
+            openErrorAlert()
+        }
     }
 
     const closeCheckout = () => {
-        saveFinalCheckout()
-        resetCurrentCheckout()
-        navigation.goBack()
+        try {
+            saveFinalCheckout()
+            resetCurrentCheckout()
+            navigation.goBack()
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const calculateCurrentBalance = () => {
@@ -208,10 +216,10 @@ function Management({ navigation }) {
                         {currentCheckout?.currentBalance}
                     </CustomText>
                 </View>
-                <Button onPress={openModal}>
+                <Button onPress={openTransactionModal}>
                     <Button.Text>Registrar Transação</Button.Text>
                 </Button>
-                <Button onPress={openAlert}>
+                <Button onPress={openDateAlert}>
                     <Button.Text>Fechar Caixa</Button.Text>
                 </Button>
                 <Table
@@ -221,15 +229,15 @@ function Management({ navigation }) {
                 />
             </Main>
 
-            {isModalOpen && (
+            {isTransactionModalOpen && (
                 <NewTransactionModal
-                    onClose={closeModal}
+                    onClose={closeTransactionModal}
                     setTransactions={setTransactions}
                 />
             )}
-            {isAlertOpen && (
+            {isDateAlertOpen && (
                 <CloseCheckoutAlert
-                    onClose={closeAlert}
+                    onClose={closeDateAlert}
                     onConfirm={closeCheckout}
                 />
             )}
